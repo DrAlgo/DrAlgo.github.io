@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.23">
+<meta name="author" content="BUT3 INFO Vélizy, David Auger, david.auger@uvsq.fr, Durée : 20h">
+<title>Qualité Algorithmique</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
+<style>
+/*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
+/* Uncomment the following line when using as a custom stylesheet */
+/* @import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700"; */
+html{font-family:sans-serif;-webkit-text-size-adjust:100%}
+a{background:none}
+a:focus{outline:thin dotted}
+a:active,a:hover{outline:0}
+h1{font-size:2em;margin:.67em 0}
+b,strong{font-weight:bold}
+abbr{font-size:.9em}
+abbr[title]{cursor:help;border-bottom:1px dotted #dddddf;text-decoration:none}
+dfn{font-style:italic}
+hr{height:0}
+mark{background:#ff0;color:#000}
+code,kbd,pre,samp{font-family:monospace;font-size:1em}
+pre{white-space:pre-wrap}
+q{quotes:"\201C" "\201D" "\2018" "\2019"}
+small{font-size:80%}
+sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}
+sup{top:-.5em}
+sub{bottom:-.25em}
+img{border:0}
+svg:not(:root){overflow:hidden}
+figure{margin:0}
+audio,video{display:inline-block}
+audio:not([controls]){display:none;height:0}
+fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em}
+legend{border:0;padding:0}
+button,input,select,textarea{font-family:inherit;font-size:100%;margin:0}
+button,input{line-height:normal}
+button,select{text-transform:none}
+button,html input[type=button],input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer}
+button[disabled],html input[disabled]{cursor:default}
+input[type=checkbox],input[type=radio]{padding:0}
+button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}
+textarea{overflow:auto;vertical-align:top}
+table{border-collapse:collapse;border-spacing:0}
+*,::before,::after{box-sizing:border-box}
+html,body{font-size:100%}
+body{background:#fff;color:rgba(0,0,0,.8);padding:0;margin:0;font-family:"Noto Serif","DejaVu Serif",serif;line-height:1;position:relative;cursor:auto;-moz-tab-size:4;-o-tab-size:4;tab-size:4;word-wrap:anywhere;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased}
+a:hover{cursor:pointer}
+img,object,embed{max-width:100%;height:auto}
+object,embed{height:100%}
+img{-ms-interpolation-mode:bicubic}
+.left{float:left!important}
+.right{float:right!important}
+.text-left{text-align:left!important}
+.text-right{text-align:right!important}
+.text-center{text-align:center!important}
+.text-justify{text-align:justify!important}
+.hide{display:none}
+img,object,svg{display:inline-block;vertical-align:middle}
+textarea{height:auto;min-height:50px}
+select{width:100%}
+.subheader,.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{line-height:1.45;color:#7a2518;font-weight:400;margin-top:0;margin-bottom:.25em}
+div,dl,dt,dd,ul,ol,li,h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6,pre,form,p,blockquote,th,td{margin:0;padding:0}
+a{color:#2156a5;text-decoration:underline;line-height:inherit}
+a:hover,a:focus{color:#1d4b8f}
+a img{border:0}
+p{line-height:1.6;margin-bottom:1.25em;text-rendering:optimizeLegibility}
+p aside{font-size:.875em;line-height:1.35;font-style:italic}
+h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{font-family:"Open Sans","DejaVu Sans",sans-serif;font-weight:300;font-style:normal;color:#ba3925;text-rendering:optimizeLegibility;margin-top:1em;margin-bottom:.5em;line-height:1.0125em}
+h1 small,h2 small,h3 small,#toctitle small,.sidebarblock>.content>.title small,h4 small,h5 small,h6 small{font-size:60%;color:#e99b8f;line-height:0}
+h1{font-size:2.125em}
+h2{font-size:1.6875em}
+h3,#toctitle,.sidebarblock>.content>.title{font-size:1.375em}
+h4,h5{font-size:1.125em}
+h6{font-size:1em}
+hr{border:solid #dddddf;border-width:1px 0 0;clear:both;margin:1.25em 0 1.1875em}
+em,i{font-style:italic;line-height:inherit}
+strong,b{font-weight:bold;line-height:inherit}
+small{font-size:60%;line-height:inherit}
+code{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;font-weight:400;color:rgba(0,0,0,.9)}
+ul,ol,dl{line-height:1.6;margin-bottom:1.25em;list-style-position:outside;font-family:inherit}
+ul,ol{margin-left:1.5em}
+ul li ul,ul li ol{margin-left:1.25em;margin-bottom:0}
+ul.circle{list-style-type:circle}
+ul.disc{list-style-type:disc}
+ul.square{list-style-type:square}
+ul.circle ul:not([class]),ul.disc ul:not([class]),ul.square ul:not([class]){list-style:inherit}
+ol li ul,ol li ol{margin-left:1.25em;margin-bottom:0}
+dl dt{margin-bottom:.3125em;font-weight:bold}
+dl dd{margin-bottom:1.25em}
+blockquote{margin:0 0 1.25em;padding:.5625em 1.25em 0 1.1875em;border-left:1px solid #ddd}
+blockquote,blockquote p{line-height:1.6;color:rgba(0,0,0,.85)}
+@media screen and (min-width:768px){h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2}
+h1{font-size:2.75em}
+h2{font-size:2.3125em}
+h3,#toctitle,.sidebarblock>.content>.title{font-size:1.6875em}
+h4{font-size:1.4375em}}
+table{background:#fff;margin-bottom:1.25em;border:1px solid #dedede;word-wrap:normal}
+table thead,table tfoot{background:#f7f8f7}
+table thead tr th,table thead tr td,table tfoot tr th,table tfoot tr td{padding:.5em .625em .625em;font-size:inherit;color:rgba(0,0,0,.8);text-align:left}
+table tr th,table tr td{padding:.5625em .625em;font-size:inherit;color:rgba(0,0,0,.8)}
+table tr.even,table tr.alt{background:#f8f8f7}
+table thead tr th,table tfoot tr th,table tbody tr td,table tr td,table tfoot tr td{line-height:1.6}
+h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2;word-spacing:-.05em}
+h1 strong,h2 strong,h3 strong,#toctitle strong,.sidebarblock>.content>.title strong,h4 strong,h5 strong,h6 strong{font-weight:400}
+.center{margin-left:auto;margin-right:auto}
+.stretch{width:100%}
+.clearfix::before,.clearfix::after,.float-group::before,.float-group::after{content:" ";display:table}
+.clearfix::after,.float-group::after{clear:both}
+:not(pre).nobreak{word-wrap:normal}
+:not(pre).nowrap{white-space:nowrap}
+:not(pre).pre-wrap{white-space:pre-wrap}
+:not(pre):not([class^=L])>code{font-size:.9375em;font-style:normal!important;letter-spacing:0;padding:.1em .5ex;word-spacing:-.15em;background:#f7f7f8;border-radius:4px;line-height:1.45;text-rendering:optimizeSpeed}
+pre{color:rgba(0,0,0,.9);font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;line-height:1.45;text-rendering:optimizeSpeed}
+pre code,pre pre{color:inherit;font-size:inherit;line-height:inherit}
+pre>code{display:block}
+pre.nowrap,pre.nowrap pre{white-space:pre;word-wrap:normal}
+em em{font-style:normal}
+strong strong{font-weight:400}
+.keyseq{color:rgba(51,51,51,.8)}
+kbd{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;display:inline-block;color:rgba(0,0,0,.8);font-size:.65em;line-height:1.45;background:#f7f7f7;border:1px solid #ccc;border-radius:3px;box-shadow:0 1px 0 rgba(0,0,0,.2),inset 0 0 0 .1em #fff;margin:0 .15em;padding:.2em .5em;vertical-align:middle;position:relative;top:-.1em;white-space:nowrap}
+.keyseq kbd:first-child{margin-left:0}
+.keyseq kbd:last-child{margin-right:0}
+.menuseq,.menuref{color:#000}
+.menuseq b:not(.caret),.menuref{font-weight:inherit}
+.menuseq{word-spacing:-.02em}
+.menuseq b.caret{font-size:1.25em;line-height:.8}
+.menuseq i.caret{font-weight:bold;text-align:center;width:.45em}
+b.button::before,b.button::after{position:relative;top:-1px;font-weight:400}
+b.button::before{content:"[";padding:0 3px 0 2px}
+b.button::after{content:"]";padding:0 2px 0 3px}
+p a>code:hover{color:rgba(0,0,0,.9)}
+#header,#content,#footnotes,#footer{width:100%;margin:0 auto;max-width:62.5em;*zoom:1;position:relative;padding-left:.9375em;padding-right:.9375em}
+#header::before,#header::after,#content::before,#content::after,#footnotes::before,#footnotes::after,#footer::before,#footer::after{content:" ";display:table}
+#header::after,#content::after,#footnotes::after,#footer::after{clear:both}
+#content{margin-top:1.25em}
+#content::before{content:none}
+#header>h1:first-child{color:rgba(0,0,0,.85);margin-top:2.25rem;margin-bottom:0}
+#header>h1:first-child+#toc{margin-top:8px;border-top:1px solid #dddddf}
+#header>h1:only-child{border-bottom:1px solid #dddddf;padding-bottom:8px}
+#header .details{border-bottom:1px solid #dddddf;line-height:1.45;padding-top:.25em;padding-bottom:.25em;padding-left:.25em;color:rgba(0,0,0,.6);display:flex;flex-flow:row wrap}
+#header .details span:first-child{margin-left:-.125em}
+#header .details span.email a{color:rgba(0,0,0,.85)}
+#header .details br{display:none}
+#header .details br+span::before{content:"\00a0\2013\00a0"}
+#header .details br+span.author::before{content:"\00a0\22c5\00a0";color:rgba(0,0,0,.85)}
+#header .details br+span#revremark::before{content:"\00a0|\00a0"}
+#header #revnumber{text-transform:capitalize}
+#header #revnumber::after{content:"\00a0"}
+#content>h1:first-child:not([class]){color:rgba(0,0,0,.85);border-bottom:1px solid #dddddf;padding-bottom:8px;margin-top:0;padding-top:1rem;margin-bottom:1.25rem}
+#toc{border-bottom:1px solid #e7e7e9;padding-bottom:.5em}
+#toc>ul{margin-left:.125em}
+#toc ul.sectlevel0>li>a{font-style:italic}
+#toc ul.sectlevel0 ul.sectlevel1{margin:.5em 0}
+#toc ul{font-family:"Open Sans","DejaVu Sans",sans-serif;list-style-type:none}
+#toc li{line-height:1.3334;margin-top:.3334em}
+#toc a{text-decoration:none}
+#toc a:active{text-decoration:underline}
+#toctitle{color:#7a2518;font-size:1.2em}
+@media screen and (min-width:768px){#toctitle{font-size:1.375em}
+body.toc2{padding-left:15em;padding-right:0}
+body.toc2 #header>h1:nth-last-child(2){border-bottom:1px solid #dddddf;padding-bottom:8px}
+#toc.toc2{margin-top:0!important;background:#f8f8f7;position:fixed;width:15em;left:0;top:0;border-right:1px solid #e7e7e9;border-top-width:0!important;border-bottom-width:0!important;z-index:1000;padding:1.25em 1em;height:100%;overflow:auto}
+#toc.toc2 #toctitle{margin-top:0;margin-bottom:.8rem;font-size:1.2em}
+#toc.toc2>ul{font-size:.9em;margin-bottom:0}
+#toc.toc2 ul ul{margin-left:0;padding-left:1em}
+#toc.toc2 ul.sectlevel0 ul.sectlevel1{padding-left:0;margin-top:.5em;margin-bottom:.5em}
+body.toc2.toc-right{padding-left:0;padding-right:15em}
+body.toc2.toc-right #toc.toc2{border-right-width:0;border-left:1px solid #e7e7e9;left:auto;right:0}}
+@media screen and (min-width:1280px){body.toc2{padding-left:20em;padding-right:0}
+#toc.toc2{width:20em}
+#toc.toc2 #toctitle{font-size:1.375em}
+#toc.toc2>ul{font-size:.95em}
+#toc.toc2 ul ul{padding-left:1.25em}
+body.toc2.toc-right{padding-left:0;padding-right:20em}}
+#content #toc{border:1px solid #e0e0dc;margin-bottom:1.25em;padding:1.25em;background:#f8f8f7;border-radius:4px}
+#content #toc>:first-child{margin-top:0}
+#content #toc>:last-child{margin-bottom:0}
+#footer{max-width:none;background:rgba(0,0,0,.8);padding:1.25em}
+#footer-text{color:hsla(0,0%,100%,.8);line-height:1.44}
+#content{margin-bottom:.625em}
+.sect1{padding-bottom:.625em}
+@media screen and (min-width:768px){#content{margin-bottom:1.25em}
+.sect1{padding-bottom:1.25em}}
+.sect1:last-child{padding-bottom:0}
+.sect1+.sect1{border-top:1px solid #e7e7e9}
+#content h1>a.anchor,h2>a.anchor,h3>a.anchor,#toctitle>a.anchor,.sidebarblock>.content>.title>a.anchor,h4>a.anchor,h5>a.anchor,h6>a.anchor{position:absolute;z-index:1001;width:1.5ex;margin-left:-1.5ex;display:block;text-decoration:none!important;visibility:hidden;text-align:center;font-weight:400}
+#content h1>a.anchor::before,h2>a.anchor::before,h3>a.anchor::before,#toctitle>a.anchor::before,.sidebarblock>.content>.title>a.anchor::before,h4>a.anchor::before,h5>a.anchor::before,h6>a.anchor::before{content:"\00A7";font-size:.85em;display:block;padding-top:.1em}
+#content h1:hover>a.anchor,#content h1>a.anchor:hover,h2:hover>a.anchor,h2>a.anchor:hover,h3:hover>a.anchor,#toctitle:hover>a.anchor,.sidebarblock>.content>.title:hover>a.anchor,h3>a.anchor:hover,#toctitle>a.anchor:hover,.sidebarblock>.content>.title>a.anchor:hover,h4:hover>a.anchor,h4>a.anchor:hover,h5:hover>a.anchor,h5>a.anchor:hover,h6:hover>a.anchor,h6>a.anchor:hover{visibility:visible}
+#content h1>a.link,h2>a.link,h3>a.link,#toctitle>a.link,.sidebarblock>.content>.title>a.link,h4>a.link,h5>a.link,h6>a.link{color:#ba3925;text-decoration:none}
+#content h1>a.link:hover,h2>a.link:hover,h3>a.link:hover,#toctitle>a.link:hover,.sidebarblock>.content>.title>a.link:hover,h4>a.link:hover,h5>a.link:hover,h6>a.link:hover{color:#a53221}
+details,.audioblock,.imageblock,.literalblock,.listingblock,.stemblock,.videoblock{margin-bottom:1.25em}
+details{margin-left:1.25rem}
+details>summary{cursor:pointer;display:block;position:relative;line-height:1.6;margin-bottom:.625rem;outline:none;-webkit-tap-highlight-color:transparent}
+details>summary::-webkit-details-marker{display:none}
+details>summary::before{content:"";border:solid transparent;border-left:solid;border-width:.3em 0 .3em .5em;position:absolute;top:.5em;left:-1.25rem;transform:translateX(15%)}
+details[open]>summary::before{border:solid transparent;border-top:solid;border-width:.5em .3em 0;transform:translateY(15%)}
+details>summary::after{content:"";width:1.25rem;height:1em;position:absolute;top:.3em;left:-1.25rem}
+.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{text-rendering:optimizeLegibility;text-align:left;font-family:"Noto Serif","DejaVu Serif",serif;font-size:1rem;font-style:italic}
+table.tableblock.fit-content>caption.title{white-space:nowrap;width:0}
+.paragraph.lead>p,#preamble>.sectionbody>[class=paragraph]:first-of-type p{font-size:1.21875em;line-height:1.6;color:rgba(0,0,0,.85)}
+.admonitionblock>table{border-collapse:separate;border:0;background:none;width:100%}
+.admonitionblock>table td.icon{text-align:center;width:80px}
+.admonitionblock>table td.icon img{max-width:none}
+.admonitionblock>table td.icon .title{font-weight:bold;font-family:"Open Sans","DejaVu Sans",sans-serif;text-transform:uppercase}
+.admonitionblock>table td.content{padding-left:1.125em;padding-right:1.25em;border-left:1px solid #dddddf;color:rgba(0,0,0,.6);word-wrap:anywhere}
+.admonitionblock>table td.content>:last-child>:last-child{margin-bottom:0}
+.exampleblock>.content{border:1px solid #e6e6e6;margin-bottom:1.25em;padding:1.25em;background:#fff;border-radius:4px}
+.sidebarblock{border:1px solid #dbdbd6;margin-bottom:1.25em;padding:1.25em;background:#f3f3f2;border-radius:4px}
+.sidebarblock>.content>.title{color:#7a2518;margin-top:0;text-align:center}
+.exampleblock>.content>:first-child,.sidebarblock>.content>:first-child{margin-top:0}
+.exampleblock>.content>:last-child,.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
+.literalblock pre,.listingblock>.content>pre{border-radius:4px;overflow-x:auto;padding:1em;font-size:.8125em}
+@media screen and (min-width:768px){.literalblock pre,.listingblock>.content>pre{font-size:.90625em}}
+@media screen and (min-width:1280px){.literalblock pre,.listingblock>.content>pre{font-size:1em}}
+.literalblock pre,.listingblock>.content>pre:not(.highlight),.listingblock>.content>pre[class=highlight],.listingblock>.content>pre[class^="highlight "]{background:#f7f7f8}
+.literalblock.output pre{color:#f7f7f8;background:rgba(0,0,0,.9)}
+.listingblock>.content{position:relative}
+.listingblock code[data-lang]::before{display:none;content:attr(data-lang);position:absolute;font-size:.75em;top:.425rem;right:.5rem;line-height:1;text-transform:uppercase;color:inherit;opacity:.5}
+.listingblock:hover code[data-lang]::before{display:block}
+.listingblock.terminal pre .command::before{content:attr(data-prompt);padding-right:.5em;color:inherit;opacity:.5}
+.listingblock.terminal pre .command:not([data-prompt])::before{content:"$"}
+.listingblock pre.highlightjs{padding:0}
+.listingblock pre.highlightjs>code{padding:1em;border-radius:4px}
+.listingblock pre.prettyprint{border-width:0}
+.prettyprint{background:#f7f7f8}
+pre.prettyprint .linenums{line-height:1.45;margin-left:2em}
+pre.prettyprint li{background:none;list-style-type:inherit;padding-left:0}
+pre.prettyprint li code[data-lang]::before{opacity:1}
+pre.prettyprint li:not(:first-child) code[data-lang]::before{display:none}
+table.linenotable{border-collapse:separate;border:0;margin-bottom:0;background:none}
+table.linenotable td[class]{color:inherit;vertical-align:top;padding:0;line-height:inherit;white-space:normal}
+table.linenotable td.code{padding-left:.75em}
+table.linenotable td.linenos,pre.pygments .linenos{border-right:1px solid;opacity:.35;padding-right:.5em;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}
+pre.pygments span.linenos{display:inline-block;margin-right:.75em}
+.quoteblock{margin:0 1em 1.25em 1.5em;display:table}
+.quoteblock:not(.excerpt)>.title{margin-left:-1.5em;margin-bottom:.75em}
+.quoteblock blockquote,.quoteblock p{color:rgba(0,0,0,.85);font-size:1.15rem;line-height:1.75;word-spacing:.1em;letter-spacing:0;font-style:italic;text-align:justify}
+.quoteblock blockquote{margin:0;padding:0;border:0}
+.quoteblock blockquote::before{content:"\201c";float:left;font-size:2.75em;font-weight:bold;line-height:.6em;margin-left:-.6em;color:#7a2518;text-shadow:0 1px 2px rgba(0,0,0,.1)}
+.quoteblock blockquote>.paragraph:last-child p{margin-bottom:0}
+.quoteblock .attribution{margin-top:.75em;margin-right:.5ex;text-align:right}
+.verseblock{margin:0 1em 1.25em}
+.verseblock pre{font-family:"Open Sans","DejaVu Sans",sans-serif;font-size:1.15rem;color:rgba(0,0,0,.85);font-weight:300;text-rendering:optimizeLegibility}
+.verseblock pre strong{font-weight:400}
+.verseblock .attribution{margin-top:1.25rem;margin-left:.5ex}
+.quoteblock .attribution,.verseblock .attribution{font-size:.9375em;line-height:1.45;font-style:italic}
+.quoteblock .attribution br,.verseblock .attribution br{display:none}
+.quoteblock .attribution cite,.verseblock .attribution cite{display:block;letter-spacing:-.025em;color:rgba(0,0,0,.6)}
+.quoteblock.abstract blockquote::before,.quoteblock.excerpt blockquote::before,.quoteblock .quoteblock blockquote::before{display:none}
+.quoteblock.abstract blockquote,.quoteblock.abstract p,.quoteblock.excerpt blockquote,.quoteblock.excerpt p,.quoteblock .quoteblock blockquote,.quoteblock .quoteblock p{line-height:1.6;word-spacing:0}
+.quoteblock.abstract{margin:0 1em 1.25em;display:block}
+.quoteblock.abstract>.title{margin:0 0 .375em;font-size:1.15em;text-align:center}
+.quoteblock.excerpt>blockquote,.quoteblock .quoteblock{padding:0 0 .25em 1em;border-left:.25em solid #dddddf}
+.quoteblock.excerpt,.quoteblock .quoteblock{margin-left:0}
+.quoteblock.excerpt blockquote,.quoteblock.excerpt p,.quoteblock .quoteblock blockquote,.quoteblock .quoteblock p{color:inherit;font-size:1.0625rem}
+.quoteblock.excerpt .attribution,.quoteblock .quoteblock .attribution{color:inherit;font-size:.85rem;text-align:left;margin-right:0}
+p.tableblock:last-child{margin-bottom:0}
+td.tableblock>.content{margin-bottom:1.25em;word-wrap:anywhere}
+td.tableblock>.content>:last-child{margin-bottom:-1.25em}
+table.tableblock,th.tableblock,td.tableblock{border:0 solid #dedede}
+table.grid-all>*>tr>*{border-width:1px}
+table.grid-cols>*>tr>*{border-width:0 1px}
+table.grid-rows>*>tr>*{border-width:1px 0}
+table.frame-all{border-width:1px}
+table.frame-ends{border-width:1px 0}
+table.frame-sides{border-width:0 1px}
+table.frame-none>colgroup+*>:first-child>*,table.frame-sides>colgroup+*>:first-child>*{border-top-width:0}
+table.frame-none>:last-child>:last-child>*,table.frame-sides>:last-child>:last-child>*{border-bottom-width:0}
+table.frame-none>*>tr>:first-child,table.frame-ends>*>tr>:first-child{border-left-width:0}
+table.frame-none>*>tr>:last-child,table.frame-ends>*>tr>:last-child{border-right-width:0}
+table.stripes-all>*>tr,table.stripes-odd>*>tr:nth-of-type(odd),table.stripes-even>*>tr:nth-of-type(even),table.stripes-hover>*>tr:hover{background:#f8f8f7}
+th.halign-left,td.halign-left{text-align:left}
+th.halign-right,td.halign-right{text-align:right}
+th.halign-center,td.halign-center{text-align:center}
+th.valign-top,td.valign-top{vertical-align:top}
+th.valign-bottom,td.valign-bottom{vertical-align:bottom}
+th.valign-middle,td.valign-middle{vertical-align:middle}
+table thead th,table tfoot th{font-weight:bold}
+tbody tr th{background:#f7f8f7}
+tbody tr th,tbody tr th p,tfoot tr th,tfoot tr th p{color:rgba(0,0,0,.8);font-weight:bold}
+p.tableblock>code:only-child{background:none;padding:0}
+p.tableblock{font-size:1em}
+ol{margin-left:1.75em}
+ul li ol{margin-left:1.5em}
+dl dd{margin-left:1.125em}
+dl dd:last-child,dl dd:last-child>:last-child{margin-bottom:0}
+li p,ul dd,ol dd,.olist .olist,.ulist .ulist,.ulist .olist,.olist .ulist{margin-bottom:.625em}
+ul.checklist,ul.none,ol.none,ul.no-bullet,ol.no-bullet,ol.unnumbered,ul.unstyled,ol.unstyled{list-style-type:none}
+ul.no-bullet,ol.no-bullet,ol.unnumbered{margin-left:.625em}
+ul.unstyled,ol.unstyled{margin-left:0}
+li>p:empty:only-child::before{content:"";display:inline-block}
+ul.checklist>li>p:first-child{margin-left:-1em}
+ul.checklist>li>p:first-child>.fa-square-o:first-child,ul.checklist>li>p:first-child>.fa-check-square-o:first-child{width:1.25em;font-size:.8em;position:relative;bottom:.125em}
+ul.checklist>li>p:first-child>input[type=checkbox]:first-child{margin-right:.25em}
+ul.inline{display:flex;flex-flow:row wrap;list-style:none;margin:0 0 .625em -1.25em}
+ul.inline>li{margin-left:1.25em}
+.unstyled dl dt{font-weight:400;font-style:normal}
+ol.arabic{list-style-type:decimal}
+ol.decimal{list-style-type:decimal-leading-zero}
+ol.loweralpha{list-style-type:lower-alpha}
+ol.upperalpha{list-style-type:upper-alpha}
+ol.lowerroman{list-style-type:lower-roman}
+ol.upperroman{list-style-type:upper-roman}
+ol.lowergreek{list-style-type:lower-greek}
+.hdlist>table,.colist>table{border:0;background:none}
+.hdlist>table>tbody>tr,.colist>table>tbody>tr{background:none}
+td.hdlist1,td.hdlist2{vertical-align:top;padding:0 .625em}
+td.hdlist1{font-weight:bold;padding-bottom:1.25em}
+td.hdlist2{word-wrap:anywhere}
+.literalblock+.colist,.listingblock+.colist{margin-top:-.5em}
+.colist td:not([class]):first-child{padding:.4em .75em 0;line-height:1;vertical-align:top}
+.colist td:not([class]):first-child img{max-width:none}
+.colist td:not([class]):last-child{padding:.25em 0}
+.thumb,.th{line-height:0;display:inline-block;border:4px solid #fff;box-shadow:0 0 0 1px #ddd}
+.imageblock.left{margin:.25em .625em 1.25em 0}
+.imageblock.right{margin:.25em 0 1.25em .625em}
+.imageblock>.title{margin-bottom:0}
+.imageblock.thumb,.imageblock.th{border-width:6px}
+.imageblock.thumb>.title,.imageblock.th>.title{padding:0 .125em}
+.image.left,.image.right{margin-top:.25em;margin-bottom:.25em;display:inline-block;line-height:0}
+.image.left{margin-right:.625em}
+.image.right{margin-left:.625em}
+a.image{text-decoration:none;display:inline-block}
+a.image object{pointer-events:none}
+sup.footnote,sup.footnoteref{font-size:.875em;position:static;vertical-align:super}
+sup.footnote a,sup.footnoteref a{text-decoration:none}
+sup.footnote a:active,sup.footnoteref a:active,#footnotes .footnote a:first-of-type:active{text-decoration:underline}
+#footnotes{padding-top:.75em;padding-bottom:.75em;margin-bottom:.625em}
+#footnotes hr{width:20%;min-width:6.25em;margin:-.25em 0 .75em;border-width:1px 0 0}
+#footnotes .footnote{padding:0 .375em 0 .225em;line-height:1.3334;font-size:.875em;margin-left:1.2em;margin-bottom:.2em}
+#footnotes .footnote a:first-of-type{font-weight:bold;text-decoration:none;margin-left:-1.05em}
+#footnotes .footnote:last-of-type{margin-bottom:0}
+#content #footnotes{margin-top:-.625em;margin-bottom:0;padding:.75em 0}
+div.unbreakable{page-break-inside:avoid}
+.big{font-size:larger}
+.small{font-size:smaller}
+.underline{text-decoration:underline}
+.overline{text-decoration:overline}
+.line-through{text-decoration:line-through}
+.aqua{color:#00bfbf}
+.aqua-background{background:#00fafa}
+.black{color:#000}
+.black-background{background:#000}
+.blue{color:#0000bf}
+.blue-background{background:#0000fa}
+.fuchsia{color:#bf00bf}
+.fuchsia-background{background:#fa00fa}
+.gray{color:#606060}
+.gray-background{background:#7d7d7d}
+.green{color:#006000}
+.green-background{background:#007d00}
+.lime{color:#00bf00}
+.lime-background{background:#00fa00}
+.maroon{color:#600000}
+.maroon-background{background:#7d0000}
+.navy{color:#000060}
+.navy-background{background:#00007d}
+.olive{color:#606000}
+.olive-background{background:#7d7d00}
+.purple{color:#600060}
+.purple-background{background:#7d007d}
+.red{color:#bf0000}
+.red-background{background:#fa0000}
+.silver{color:#909090}
+.silver-background{background:#bcbcbc}
+.teal{color:#006060}
+.teal-background{background:#007d7d}
+.white{color:#bfbfbf}
+.white-background{background:#fafafa}
+.yellow{color:#bfbf00}
+.yellow-background{background:#fafa00}
+span.icon>.fa{cursor:default}
+a span.icon>.fa{cursor:inherit}
+.admonitionblock td.icon [class^="fa icon-"]{font-size:2.5em;text-shadow:1px 1px 2px rgba(0,0,0,.5);cursor:default}
+.admonitionblock td.icon .icon-note::before{content:"\f05a";color:#19407c}
+.admonitionblock td.icon .icon-tip::before{content:"\f0eb";text-shadow:1px 1px 2px rgba(155,155,0,.8);color:#111}
+.admonitionblock td.icon .icon-warning::before{content:"\f071";color:#bf6900}
+.admonitionblock td.icon .icon-caution::before{content:"\f06d";color:#bf3400}
+.admonitionblock td.icon .icon-important::before{content:"\f06a";color:#bf0000}
+.conum[data-value]{display:inline-block;color:#fff!important;background:rgba(0,0,0,.8);border-radius:50%;text-align:center;font-size:.75em;width:1.67em;height:1.67em;line-height:1.67em;font-family:"Open Sans","DejaVu Sans",sans-serif;font-style:normal;font-weight:bold}
+.conum[data-value] *{color:#fff!important}
+.conum[data-value]+b{display:none}
+.conum[data-value]::after{content:attr(data-value)}
+pre .conum[data-value]{position:relative;top:-.125em}
+b.conum *{color:inherit!important}
+.conum:not([data-value]):empty{display:none}
+dt,th.tableblock,td.content,div.footnote{text-rendering:optimizeLegibility}
+h1,h2,p,td.content,span.alt,summary{letter-spacing:-.01em}
+p strong,td.content strong,div.footnote strong{letter-spacing:-.005em}
+p,blockquote,dt,td.content,td.hdlist1,span.alt,summary{font-size:1.0625rem}
+p{margin-bottom:1.25rem}
+.sidebarblock p,.sidebarblock dt,.sidebarblock td.content,p.tableblock{font-size:1em}
+.exampleblock>.content{background:#fffef7;border-color:#e0e0dc;box-shadow:0 1px 4px #e0e0dc}
+.print-only{display:none!important}
+@page{margin:1.25cm .75cm}
+@media print{*{box-shadow:none!important;text-shadow:none!important}
+html{font-size:80%}
+a{color:inherit!important;text-decoration:underline!important}
+a.bare,a[href^="#"],a[href^="mailto:"]{text-decoration:none!important}
+a[href^="http:"]:not(.bare)::after,a[href^="https:"]:not(.bare)::after{content:"(" attr(href) ")";display:inline-block;font-size:.875em;padding-left:.25em}
+abbr[title]{border-bottom:1px dotted}
+abbr[title]::after{content:" (" attr(title) ")"}
+pre,blockquote,tr,img,object,svg{page-break-inside:avoid}
+thead{display:table-header-group}
+svg{max-width:100%}
+p,blockquote,dt,td.content{font-size:1em;orphans:3;widows:3}
+h2,h3,#toctitle,.sidebarblock>.content>.title{page-break-after:avoid}
+#header,#content,#footnotes,#footer{max-width:none}
+#toc,.sidebarblock,.exampleblock>.content{background:none!important}
+#toc{border-bottom:1px solid #dddddf!important;padding-bottom:0!important}
+body.book #header{text-align:center}
+body.book #header>h1:first-child{border:0!important;margin:2.5em 0 1em}
+body.book #header .details{border:0!important;display:block;padding:0!important}
+body.book #header .details span:first-child{margin-left:0!important}
+body.book #header .details br{display:block}
+body.book #header .details br+span::before{content:none!important}
+body.book #toc{border:0!important;text-align:left!important;padding:0!important;margin:0!important}
+body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-break-before:always}
+.listingblock code[data-lang]::before{display:block}
+#footer{padding:0 .9375em}
+.hide-on-print{display:none!important}
+.print-only{display:block!important}
+.hide-for-print{display:none!important}
+.show-for-print{display:inherit!important}}
+@media amzn-kf8,print{#header>h1:first-child{margin-top:1.25rem}
+.sect1{padding:0!important}
+.sect1+.sect1{border:0}
+#footer{background:none}
+#footer-text{color:rgba(0,0,0,.6);font-size:.9em}}
+@media amzn-kf8{#header,#content,#footnotes,#footer{padding:0}}
+</style>
+</head>
+<body class="article toc2 toc-left">
+<div id="header">
+<h1>Qualité Algorithmique</h1>
+<div class="details">
+<span id="author" class="author">BUT3 INFO Vélizy</span><br>
+<span id="author2" class="author">David Auger</span><br>
+<span id="author3" class="author">david.auger@uvsq.fr</span><br>
+<span id="author4" class="author">Durée : 20h</span><br>
+</div>
+<div id="toc" class="toc2">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#_un_modèle_de_calcul_la_machine_de_turing">1. Un modèle de calcul : la machine de Turing</a>
+<ul class="sectlevel2">
+<li><a href="#_la_notion_dalgorithme">1.1. La notion d&#8217;algorithme</a></li>
+<li><a href="#_rappel_automates">1.2. Rappel : automates</a></li>
+<li><a href="#_formalisation_de_la_notion_dalgorithme">1.3. Formalisation de la notion d&#8217;algorithme ?</a></li>
+<li><a href="#_la_machine_de_turing">1.4. La machine de Turing</a></li>
+<li><a href="#_langage_reconnu_par_une_mt">1.5. Langage reconnu par une MT</a></li>
+<li><a href="#_le_problème_de_larrêt">1.6. Le problème de l&#8217;arrêt</a></li>
+<li><a href="#_la_thèse_de_church_turing">1.7. La thèse de Church-Turing</a></li>
+<li><a href="#_exercices">1.8. Exercices</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_un_modèle_de_calcul_la_machine_de_turing">1. Un modèle de calcul : la machine de Turing</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_la_notion_dalgorithme">1.1. La notion d&#8217;algorithme</h3>
+<div class="quoteblock">
+<blockquote>
+Un algorithme est une suite finie et non ambiguë d&#8217;instructions et d’opérations permettant de résoudre une classe de problèmes.
+</blockquote>
+<div class="attribution">
+&#8212; wikipedia :"Algorithme"
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Origine du mot : Al-Khwârizmî (en arabe : الخوارزمي),  mathématicien persan du IXe siècle (780-850)</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="img/alk.jpg" alt="alk" width="150">
+</div>
+<div class="title">Figure 1. Al-Khwârizmî</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Les premiers algorithmes remontent à l&#8217;antiquité (divisions, nombres premiers, etc)</p>
+</li>
+<li>
+<p>Définition plus précise des propriétés d&#8217;un algorithme :</p>
+</li>
+</ul>
+</div>
+<div class="quoteblock">
+<blockquote>
+<strong>finitude</strong> : un algorithme doit toujours se terminer après un nombre fini d’étapes<br>
+<strong>définition précise</strong> : chaque étape d&#8217;un algorithme doit être définie précisément, les actions à transposer doivent être spécifiées rigoureusement et sans ambiguïté pour chaque cas<br>
+<strong>entrées</strong> : quantités qui lui sont données avant qu&#8217;un algorithme ne commence. Ces entrées sont prises dans un ensemble d&#8217;objets spécifié (on parlerait aujourd&#8217;hui de données)<br>
+<strong>sorties</strong> : quantités ayant une relation spécifiée avec les entrées (la spécification dépend du <strong>problème</strong> résolu par l&#8217;algorithme)<br>
+<strong>rendement</strong> : toutes les opérations que l&#8217;algorithme doit accomplir doivent être suffisamment basiques pour pouvoir être en principe réalisées dans une durée finie par un homme utilisant un papier et un crayon.
+</blockquote>
+<div class="attribution">
+&#8212; Donald Knuth -- Algorithmes
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="img/knuth.png" alt="knuth" width="200">
+</div>
+<div class="title">Figure 2. Knuth 1965</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Ces propriétés informelles permettent de parler d&#8217;algorithmes mais deviennent insuffisantes pour prouver de réelles propriétés sur les algorithmes, comme répondre à la question suivante :</p>
+</li>
+</ul>
+</div>
+<div class="quoteblock">
+<blockquote>
+Existe-t-il un algorithme pour résoudre toute question
+mathématique ? (Entscheidungsproblem, traduit en “problème de décision”)
+</blockquote>
+<div class="attribution">
+&#8212; David Hilbert 1928
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="img/hilbert.jpg" alt="hilbert" width="150">
+</div>
+<div class="title">Figure 3. David Hilbert</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Nous répondrons à cette question par la négative (théorème d&#8217;indécidabilité de Turing)</p>
+</li>
+<li>
+<p>Il faut formaliser ce qu&#8217;est un algorithme, ce que c&#8217;est que calculer,  d&#8217;où la notion de <strong>modèle de calcul</strong></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_rappel_automates">1.2. Rappel : automates</h3>
+<div class="sect3">
+<h4 id="_automate_déterministe">1.2.1. Automate déterministe</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Un <strong>alphabet</strong> est un ensemble fini de symboles \(\Sigma\).</p>
+</li>
+<li>
+<p>Un <strong>automate fini déterministe</strong> (complet) est défini sur \(\Sigma\), en donnant un ensemble fini d&#8217;états dont un état initial, au moins un état final (acceptant) et une fonction de transition.</p>
+</li>
+<li>
+<p>C&#8217;est un objet mathématique dont on peut parfois donner une représentation graphique comme celle ci-dessous.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="img/automate_1.png" alt="DFA" width="400">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Un automate déterministe fait correspondre à un mot  \(u \in \Sigma^*\) un état d&#8217;arrivée \(\delta^*(q_0,u)\) obtenu en suivant l&#8217;unique chemin étiquetté par le mot \(u\) qui commence dans l&#8217;unique état initial \(q_0\).</p>
+</li>
+<li>
+<p>On dit que le mot \(u\) est <strong>reconnu</strong> ou <strong>accepté</strong> si \(\delta^*(q_0,u)\) est un état final de l&#8217;automate. On note \(L(A)\) l&#8217;ensemble des mots reconnus par l&#8217;automate \(A\), ainsi</p>
+</li>
+</ul>
+</div>
+<div class="stemblock">
+<div class="content">
+\[L(A) \subset \Sigma^*\]
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_notion_de_problème_algorithmique_formel">1.2.2. Notion de problème algorithmique formel</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Considérons le <em>problème algorithmique</em> : un nombre entier donné, écrit un base 2, est-il divisible par 3 ? C&#8217;est un <strong>problème de décision</strong> car on attend une réponse booléenne.</p>
+</li>
+<li>
+<p>Ce problème est résolu par l&#8217;automate de la figure ci-dessus (exercice). La notion d&#8217;automate est formelle, mais pas la notion de problème. Quel est donc formellement le problème résolu par l&#8217;automate ?</p>
+</li>
+<li>
+<p><strong>Définition</strong> : un <strong>problème de décision</strong> sur un alphabet \(\Sigma\) est une partie de \(\Sigma^*\), c&#8217;est-donc-un ensemble de mots \(P \subset \Sigma^*\).</p>
+</li>
+<li>
+<p>Les <strong>instances</strong> des problèmes doivent être encodés par des mots dans un alphabet, et identifie le problème en lui-même à l&#8217;ensemble des instances sur lesquelles la réponse attendue est "vrai".</p>
+</li>
+<li>
+<p>Dans l&#8217;exemple ci-dessus, on peut définir le problème \(P_3\) comme l&#8217;ensemble des suites finies binaires (mots binaires) \((a_n,a_{n-1},\dots,a_0)\) telles que</p>
+</li>
+</ul>
+</div>
+<div class="stemblock">
+<div class="content">
+\[3 \text{ divise } a_n \cdot 2^n + a_{n-1} \cdot 2^{n-1} + \dots + a_1 \cdot 2 + a_0\]
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Informellement, le problème consiste à décider si un mot binaire donné fait partie de \(P_3\) ou non.</p>
+</li>
+<li>
+<p>Les problèmes étudiés en informatique dont la réponse est binaire (oui/non), qui sont des problèmes de calcul, peuvent être formulés par un mot dans un alphabet approprié, en binaire si on le souhaite (vu qu&#8217;au final les données sont transmises à la machine sous cette forme). C&#8217;est l'<strong>encodage</strong> du problème.</p>
+</li>
+<li>
+<p>Par exemple, pour le problème <em>"déterminer si trois points du plan à coordonnées rationnelles sont alignés"</em>, il faut encoder les coordonnées des points par suites binaires  (comment faire ?) et donner les 6 nombres.</p>
+</li>
+<li>
+<p>Il y a plusieurs choix possibles donc pas un seul encodage de ce problème. Mais on parlera "du" problème d&#8217;alignement des points, car les différents encodages "raisonnables" peuvent être considérés équivalents du point de vue des questions qui vont nous intéresser.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_formalisation_de_la_notion_dalgorithme">1.3. Formalisation de la notion d&#8217;algorithme ?</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>L&#8217;automate \(A\) de l&#8217;exemple résout le problème de décision \(P_3\) puisque \(L(A) = P_3\).</p>
+</li>
+<li>
+<p>Etant donné un mot binaire, l&#8217;algorithme consistant à parcourir l&#8217;automate fournit la réponse au problème de décision.</p>
+</li>
+<li>
+<p>On formaliser un algorithme par un automate ?</p>
+</li>
+<li>
+<p>Problème : il existe des problèmes que l&#8217;on sait résoudre mais pour lesquels les automates sont insuffisants. Un exemple ?</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_la_machine_de_turing">1.4. La machine de Turing</h3>
+<div class="imageblock">
+<div class="content">
+<img src="img/turing.jpg" alt="turing" width="120">
+</div>
+<div class="title">Figure 4. Alan Turing 1912-1954</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Version plus puissante d&#8217;un automate. L&#8217;automate possède en effet une mémoire finie (ses états) alors que la machine de Turing possède une mémoire infinie.</p>
+</li>
+<li>
+<p>En fait, un automate permet de représenter tous les algorithmes qui travaillent (sur des mots de toute longueur) avec la même mémoire finie. Si pour un problème \(P \subset \Sigma^*\), vous connaissez un algorithme au sens intuitif, qui résout le problème d&#8217;appartenance à P tout en utilisant une mémoire finie fixée (un nombre fixe de variables entières par exemple), alors vous pouvez résoudre ce problème par un automate (éventuellement très gros).</p>
+</li>
+<li>
+<p>Exemple : déterminer si un tableau d&#8217;entiers compris entre 1 et 10 est croissant.</p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="_définition">1.4.1. Définition</h4>
+<div class="paragraph">
+<p>Une <strong>machine de Turing</strong> (MT) est définie par</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>un alphabet \(\Sigma\)</p>
+</li>
+<li>
+<p>un ensemble fini d&#8217;états \(Q\)</p>
+</li>
+<li>
+<p>un état initial \(q_0 \in Q\)</p>
+</li>
+<li>
+<p>deux états spéciaux \(accept\) et \(reject\)</p>
+</li>
+<li>
+<p>une fonction de transition \(\delta\)</p>
+</li>
+</ul>
+</div>
+<div class="stemblock">
+<div class="content">
+\[\delta : Q \times \Sigma_\square \rightarrow Q \times \Sigma_\square \times \{-1,0,+1\}\]
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>\(\square\) est un symbole n&#8217;appartenant pas à \(\Sigma\) et appelé "blanc". La notation \(\Sigma_\square\) signifie \(\Sigma \cup \{\square\}\)</p>
+</li>
+<li>
+<p>En fonction d&#8217;un état et d&#8217;un symbole lu, la fonction de transition donne un nouvel état (comme pour les automates) mais aussi un symbole à écrire et un déplacement de la "tête de lecture/écriture".</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_fonctionnement_de_la_mt">1.4.2. Fonctionnement de la MT</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Pour un automate, il suffit de savoir où on en est dans la lecture du mot, et dans quel état. Pour une MT le fonctionnement est un peu plus complexe.</p>
+</li>
+<li>
+<p>Exemple explicatif 1 : <a href="https://turingmachinesimulator.com/" class="bare">https://turingmachinesimulator.com/</a> , exemple "even number of zeros". Dans cet exemple la machine n&#8217;écrit pas.</p>
+</li>
+<li>
+<p>Exemple explicatif 2 : même site, duplicate binary string (ceci n&#8217;est pas une version "décision").</p>
+</li>
+<li>
+<p>Une configuration d&#8217;une MT est la donnée d&#8217;un triplet \((B,pos,q)\) où :</p>
+<div class="ulist">
+<ul>
+<li>
+<p>\(B\) est une fonction de \(\mathbb Z\) dans \(\Sigma \cup \{\square\}\) appelée <strong>état de la bande infine</strong></p>
+</li>
+<li>
+<p>\(pos \in \mathbb Z\) est un entier qui désigne la position de la tête de lecture/écriture</p>
+</li>
+<li>
+<p>\(q\) est un état de la MT</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Si \(u \in \Sigma^*\), la <strong>configuration initiale de la MT sur l&#8217;instance \(u\)</strong> est \((B,pos,q)\) où :</p>
+<div class="ulist">
+<ul>
+<li>
+<p>\(B\) contient le symbole \(\square\) partout, sauf sur les n première cases de 0 à n-1 où le mot \(u\) est inscrit (ici n est la longueur de \(u\))</p>
+</li>
+<li>
+<p>\(pos = 0\)</p>
+</li>
+<li>
+<p>\(q = q_0\) l&#8217;état initial de la MT</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>La <strong>fonction de transition</strong> de la MT, notée \(\delta\), décrit comment on passe d&#8217;une configuration à une autre. Cette transition est basée uniquement sur \(q\) et le symbole de la bande \(B\) en position \(pos\) soit \(B(pos)\). On a vu que</p>
+</li>
+</ul>
+</div>
+<div class="stemblock">
+<div class="content">
+\[\delta : Q \times \Sigma_\square \rightarrow Q \times \Sigma_\square \times \{-1,0,+1\}\]
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>L&#8217;interpretétation est la suivante : depuis une configuration \((B,pos,q)\), si le symbole sous la tête de lecture est \(x = B(pos)\),
+et si \(\delta(q,x) = (q', x', d)\) alors la nouvelle configuration est
+\((B',pos',q')\) avec</p>
+<div class="ulist">
+<ul>
+<li>
+<p>\(B'\) est égal à \(B\) sauf le symbole \(B'(pos) = x'\)</p>
+</li>
+<li>
+<p>\(q'\) est l&#8217;état donné par \(\delta\)</p>
+</li>
+<li>
+<p>\(pos' = pos + d\)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>On remarque que</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Seul le symbole sous la tête de lecture est changé en un nouveau symbole \(x' \in \Sigma_\square\) qui ne dépend que du symbole de départ \(B(pos)\) et de l&#8217;état \(q\) (si c&#8217;est le même symbole, rien ne change)</p>
+</li>
+<li>
+<p>La tête de lecture peut se déplacer d&#8217;une case à gauche, à droite, ou rester sur place.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>On ne définit pas les transitions à partir des états \(accept\) et \(reject\) qui sont des états d&#8217;arrêt de la MT.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_exécution_de_la_machine_de_turing_sur_un_mot_u">1.4.3. Exécution de la machine de Turing sur un mot \(u\)</h4>
+<div class="paragraph">
+<p>On définit une suite de configurations \((C_i = (B_i,pos_i,q_i))\) :
+* \(C_0\) est la configuration initiale sur le mot \(u\)
+* Tant que l&#8217;état \(q_i\) est différent de \(accept, reject\), on définit la nouvelle configuration \(C_{i+1}\) par la transition décrite précédemment
+* Si la machine atteint un état de \(accept, reject\), on dit que la machine s&#8217;arrête et que le mot est \(u\) est accepté ou reconnu si l&#8217;état final est \(accept\). Si la machine ne s&#8217;arrête pas ou si \(reject\) est atteint, le mot n&#8217;est pas reconnu.
+* Notez qu&#8217;il est possible que l&#8217;éxécution ne s&#8217;arrête jamais !</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_langage_reconnu_par_une_mt">1.5. Langage reconnu par une MT</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Etant donnée une machine de Turing \(M\) sur un alphabet \(\Sigma\), le langage \(L(M)\) est l&#8217;ensemble des mots dans \(\Sigma^*\) qui sont acceptés par la machine.  Un problème de décision, c&#8217;est à dire un sous-ensemble \(P  \subset \Sigma^*\), est dit <strong>décidable</strong> s&#8217;il existe une machine de Turing \(M\) telle que \(L(M) = P\). Le théorème de Turing de 1936 montre qu&#8217;il existe un problème indécidable, le problème de l&#8217;arrêt.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_le_problème_de_larrêt">1.6. Le problème de l&#8217;arrêt</h3>
+<div class="sect3">
+<h4 id="_machines_de_turing_universelles">1.6.1. Machines de Turing universelles</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Une <strong>machine de Turing universelle</strong>  \(M_U\) est une machine de Turing sur \(\Sigma\) dont les instances sont des mots de forme \(u_1,u_2\) où</p>
+<div class="ulist">
+<ul>
+<li>
+<p>\(u_1\) est la description mathématique d&#8217;une machine de Turing  \(M_1\) sur \(\Sigma\) (on encode la liste des états, des transitions, etc)</p>
+</li>
+<li>
+<p>\(u_2\) est une instance de  \(M_1\)</p>
+</li>
+<li>
+<p>\(,\) est un symbole quelconque de séparation</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>telle que la sortie (output) de \(M_U\) sur \(u,v\) est exactement la sortie de \(M_1\) sur \(u_2\)</p>
+</li>
+<li>
+<p>Une machine de Turing universelle permet donc de simuler n&#8217;import quelle machine de Turing à l&#8217;aide de sa description.</p>
+</li>
+<li>
+<p>C&#8217;est ce que font tous les langages de programmation !</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_le_problème_de_larret">1.6.2. Le problème de l&#8217;arret</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Le problème de l&#8217;arrêt est le problème de décision suivant : étant donné la description \(u_1\) d&#8217;une machine \(M_1\), et une instance \(u_2\), l&#8217;exécution de la machine \(M_1\) sur \(u_2\) va-t&#8217;elle se terminer ?</p>
+</li>
+<li>
+<p>Formellement, c&#8217;est l&#8217;ensemble des mots de la forme \(u_1,u_2\) comme ci-dessus, tels que la machine décrite par \(u_1\) s&#8217;arrête sur \(u_2\).</p>
+</li>
+<li>
+<p>Le <strong>Théorème d&#8217;indécidabilité de Turing sur le problème de l&#8217;arrêt</strong> affirme que ce problème est indécidable : aucune machine de Turing ne reconnaît exactement ce langage.</p>
+</li>
+<li>
+<p>Interprétation ?</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_preuve_du_théorème_de_turing_sous_forme_de_programmes_python">1.6.3. Preuve du théorème de Turing sous forme de programmes python</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>La preuve de ce résultat demande plus d&#8217;abstraction et de formalisation, aussi nous l&#8217;expliquerons sous la forme de "programme python" en prouvant qu&#8217;il n&#8217;existe aucun python capable de savoir à l&#8217;avance si un autre programme python va s&#8217;arrêter ou non, ou bien tourner à l&#8217;infini. On peut trouver aussi une illustration de cette preuve sur <a href="https://www.youtube.com/watch?v=92WHN-pAFCs" class="bare">https://www.youtube.com/watch?v=92WHN-pAFCs</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Considérons les programmes python qui prennent en argument n&#8217;importe quel fichier texte, et font des calculs et affichent des résultats (print) dans la console. Soit un tel programme <code>manip_texte.py</code>, que l&#8217;on lance sur un fichier texte <code>texte1.txt</code> par une commande terminal
+<code>python manip_texte.py arg1=texte1.txt</code>. Deux comportements sont possibles :</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>soit le programme s&#8217;arrête sans planter au bout d&#8217;un moment. On dira dans ce cas que le programme termine.</p>
+</li>
+<li>
+<p>soit le programme tourne à l&#8217;infini ou a une erreur d&#8217;exécution, on dira qu&#8217;il plante.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Nommons par commodité <em>programme textuel</em> un tel programme python.</p>
+</div>
+<div class="paragraph">
+<p>Supposons qu&#8217;il existe un programme <code>analyseur.py</code> qui prenne deux arguments :
+* <code>arg1</code> est le code d&#8217;un programme textuel <code>manip_texte.py</code>
+* <code>arg2</code> est un fichier texte <code>texte1.txt</code></p>
+</div>
+<div class="paragraph">
+<p>et tel que :</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>la commande <code>python analyseur.py arg1=manip_texte.py arg2=texte1.txt</code> termine toujours</p>
+</li>
+<li>
+<p>cette commande écrit "ok" dans le terminal si et seulement si la commande <code>python manip_texte.py arg1=texte1.txt</code> se termine, sinon (si ça plante, si ce n&#8217;est pas un programme textuel valide, en cas de boucle infinie etc) cela écrit "erreur".</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Le programme <code>analyseur.py</code> permet donc de prévoir le comportement d&#8217;un programme python sur un argument donné, sans l&#8217;exécuter complètement (au cas où il tourne à l&#8217;infini par exemple) et en analysant son code. C&#8217;est donc davantage qu&#8217;un compilateur qui analyse si <code>manip_texte.py</code> est correct, car il simule en quelque sorte l&#8217;exécution du programme : nous allons montrer qu&#8217;un tel programme <code>analyseur.py</code> <strong>ne peut pas exister</strong>.</p>
+</div>
+<div class="paragraph">
+<p>En effet, si c&#8217;était le cas, comme les programmes python étant des fichiers textes, on peut exécuter la commande</p>
+</div>
+<div class="paragraph">
+<p><code>python analyseur.py arg1=manip_texte.py arg2=manip_texte.py</code></p>
+</div>
+<div class="paragraph">
+<p>ce qui nous dira si <code>manip_texte.py</code> s&#8217;arrête ou non quand on le lance sur son propre code (tout dépend du programme considéré&#8230;&#8203;)
+Construisons à partir de cela un programme negation.py qui ne prend qu&#8217;un code de programme python <code>manip_texte.py</code> en argument (ou n&#8217;importe quel fichier texte au final), et tel que la commande</p>
+</div>
+<div class="paragraph">
+<p><code>python negation.py arg1=manip_texte.py</code></p>
+</div>
+<div class="paragraph">
+<p>fasse :</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>si <code>python analyseur.py arg1=manip_texte.py arg2=manip_texte.py</code> répond "erreur", alors le programme se termine et affiche "yo" (ce sera le cas par exemple si manip_texte.py n&#8217;est pas un programme python valide, ou s&#8217;il entre dans une boucle infinie sur son propre code).</p>
+</li>
+<li>
+<p>si <code>python analyseur.py arg1=manip_texte.py arg2=manip_texte.py</code> répond "ok", alors on entre dans une boucle infinie (une boucle while par exemple).</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Il est facile de construire <code>negation.py</code> si l&#8217;on dispose de <code>analyseur.py</code>.
+Qu&#8217;est-ce que va afficher la commande</p>
+</div>
+<div class="paragraph">
+<p><code>python negation.py arg1=negation.py</code> ?</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>si <code>analyseur.py arg1=negation.py arg2=negation.py</code> répond "ok", alors par construction <code>python negation.py arg1=negation.py</code> entre dans une boucle infinie&#8230;&#8203; donc <code>analyseur.py arg1=negation.py arg2=negation.py</code> n&#8217;a pas donné la bonne réponse puisqu&#8217;il a dit que ce programme se terminait ("ok") !</p>
+</li>
+<li>
+<p>si <code>analyseur.py arg1=negation.py arg2=negation.py</code> répond "erreur", alors par construction <code>python negation.py arg1=negation.py</code> termine et écrit "yo". Donc <code>analyseur.py arg1=negation.py arg2=negation.py</code> n&#8217;a pas donné la bonne réponse non plus puisqu&#8217;il a prévu que ce programme donnait une erreur ("erreur") !</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>On voit donc qu&#8217;un tel programme <code>analyseur.py</code> qui donne toujours la bonne réponse en prévoyant le comportement des programmes ne peut pas exister.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_la_thèse_de_church_turing">1.7. La thèse de Church-Turing</h3>
+<div class="imageblock">
+<div class="content">
+<img src="img/church.jpg" alt="church" width="120">
+</div>
+<div class="title">Figure 5. Alonzo Church 1903 - 1995</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>La machine de Turing essaie de formaliser les questions : "qu&#8217;est-ce qu&#8217;un algorithme ?", "que peut faire un algorithme ?" ou autrement dit "que peut-on calculer ?"" (à la main ou avec une machine) et d&#8217;y répondre.</p>
+</li>
+<li>
+<p>Ce n&#8217;est pas le seule modèle de calcul qui existe mais c&#8217;est un des plus simples. Citons par exemple :</p>
+<div class="ulist">
+<ul>
+<li>
+<p>les différentes variantes sur les machines de Turing (semi-infinies, bandes multiples, etc)</p>
+</li>
+<li>
+<p>le lambda-calcul, inventé par Alonzo Church</p>
+</li>
+<li>
+<p>les systèmes de réécriture</p>
+</li>
+<li>
+<p>les modèles RAM (Random Access Machine) qui sont proches de la programmation</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Il se trouve que ces modèles sont équivalents dans le sens que les langages décidables sont exactement les mêmes !</p>
+</li>
+<li>
+<p>De plus, on n&#8217;arrive pas à concevoir un "algorithme" au sens intuitif, nous permettant de calculer effectivement quelque chose, que l&#8217;on ne sait pas modéliser par une machine de Turing.</p>
+</li>
+<li>
+<p>La <strong>thèse de Church-Turing</strong> est une <strong>position philosophique</strong> qui consiste à affirmer que ce qui est effectivement calculable dans la vie réelle correspond exactement à ce qui peut être calculé par les machines de Turing, et que ce modèle représente donc parfaitement la notion d&#8217;algorithme.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_exercices">1.8. Exercices</h3>
+<div class="sect3">
+<h4 id="_problèmes_de_décision">1.8.1. Problèmes de Décision</h4>
+<div class="paragraph">
+<p>Formaliser les problèmes suivants en précisant l&#8217;alphabet.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Décider si un entier a divise un entier b.</p>
+</li>
+<li>
+<p>Décider si une suite finie d&#8217;entiers est en ordre croissant.</p>
+</li>
+<li>
+<p>Décider si une famille de vecteurs réels de dimension 2 est libre.</p>
+</li>
+<li>
+<p>Décider si un graphe orienté contient un chemin orienté entre deux sommets donnés.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_machines_de_turing">1.8.2. Machines de Turing</h4>
+<div class="paragraph">
+<p>Ces exercices (sauf le dernier)  peuvent être faits sur papier, en programmation python, ou via Turing Machine Simulator.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Donner une machine de Turing sur l&#8217;alphabet \(\{0,1\}\) qui déplace la tête de lecture à droite de l&#8217;entrée et ajoute un 1, puis s&#8217;arrête.</p>
+</li>
+<li>
+<p>Donner une machine de Turing sur l&#8217;alphabet \(\{0,1\}\) qui remplace les 1 par des 0 et des 0 par des 1.</p>
+</li>
+<li>
+<p>Donner une machine de Turing sur l&#8217;alphabet \(\{0,1\}\) qui remplace les 1 par des 11 et les 0 par des 00.</p>
+</li>
+<li>
+<p>Donner une machine de Turing sur l&#8217;alphabet \(\{0,1\}\) qui supprime le premier symbole d&#8217;un mot (et donc décale le reste).</p>
+</li>
+<li>
+<p>Donner une machine de Turing sur l&#8217;alphabet \(\{0,1\}\) qui reconnaît les mots dont le nombre de 1 est divisible par 3.</p>
+</li>
+<li>
+<p>Donner une machine de Turing sur l&#8217;alphabet \(\{0,1\}\) qui reconnaît les mots de la forme \(0^n 1^n\)</p>
+</li>
+<li>
+<p>Donner une machine de Turing sur l&#8217;alphabet \(\{0,1\}\) qui ajoute 1 à un nombre entier écrit un binaire (choisissez l&#8217;encodage des entiers qui vous convient).</p>
+</li>
+<li>
+<p>Etant donné un automate fini déterministe \((\Sigma,Q,q_0,F,\delta)\), donnez une machine de Turing qui reconnaisse exactement le même langage.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2024-09-08 18:16:06 +0200
+</div>
+</div>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  messageStyle: "none",
+  tex2jax: {
+    inlineMath: [["\\(", "\\)"]],
+    displayMath: [["\\[", "\\]"]],
+    ignoreClass: "nostem|nolatexmath"
+  },
+  asciimath2jax: {
+    delimiters: [["\\$", "\\$"]],
+    ignoreClass: "nostem|noasciimath"
+  },
+  TeX: { equationNumbers: { autoNumber: "none" } }
+})
+MathJax.Hub.Register.StartupHook("AsciiMath Jax Ready", function () {
+  MathJax.InputJax.AsciiMath.postfilterHooks.Add(function (data, node) {
+    if ((node = data.script.parentNode) && (node = node.parentNode) && node.classList.contains("stemblock")) {
+      data.math.root.display = "block"
+    }
+    return data
+  })
+})
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
+</body>
+</html>

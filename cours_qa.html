@@ -511,6 +511,13 @@ $(document).on('page:load', ready2);
 <li><a href="#_le_masters_theorem">3.3. Le Master&#8217;s Theorem</a></li>
 </ul>
 </li>
+<li><a href="#_programmation_dynamique">4. Programmation dynamique</a>
+<ul class="sectlevel2">
+<li><a href="#_la_suite_de_fibonacci">4.1. La suite de Fibonacci</a></li>
+<li><a href="#_plus_courts_chemins_dans_un_graphe_acyclique">4.2. Plus courts chemins dans un graphe acyclique</a></li>
+</ul>
+</li>
+<li><a href="#_calcul_du_plus_court_chemin">5. Calcul  du plus court chemin</a></li>
 </ul>
 </div>
 </div>
@@ -1600,10 +1607,437 @@ si n est de la forme \(n_0 b^p\) pour un \(p \geq 1\). Alors suivant les cas</p>
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_programmation_dynamique">4. Programmation dynamique</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_la_suite_de_fibonacci">4.1. La suite de Fibonacci</h3>
+<div class="paragraph">
+<p>La suite de Fibonacci est définie par \(F_0 = 0, F_1 = 1\) et
++
+\[ F_n = F_{n-1} + F_{n-2} \text{ pour } n \geq 2.\]
+Les premiers termes de la suite sont :</p>
+</div>
+<div class="paragraph">
+<p>+
+\[1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, \dots\]</p>
+</div>
+<div class="paragraph">
+<p>Un problème classique est de calculer \(F_n\). On peut bien entendu calculer tous les termes de \(2\) à \(n\) en les stockant, ce qui prendra un temps \(O(n)\) et un espace \(O(n)\). Ceci est une approche <strong>bottom-up</strong> c&#8217;est à dire de bas en haut.</p>
+</div>
+<div class="paragraph">
+<p>Il existe en fait une formule directe pour calculer les termes, c&#8217;est</p>
+</div>
+<div class="paragraph">
+<p>+
+\[F_n = \frac{\phi^n - (1- \phi)^n}{\sqrt{5}}\]
+avec \(\phi = \frac{1+\sqrt{5}}{2} \approx 1,61\) (le nombre d&#8217;or) mais elle demande du calcul sur les réels et ne sera pas utilisable dans des variantes  de suites plus complexes.</p>
+</div>
+<div class="paragraph">
+<p>Retenons de cette formule uniquement que</p>
+</div>
+<div class="paragraph">
+<p>+
+\[ F_n \approx c . \phi^n \text{ avec } \phi \approx 1,61\]
+où \(c\) est une constante, quand \(n\) est grand. La suite \(F_n\) augmente donc de manière exponentielle.</p>
+</div>
+<div class="sect3">
+<h4 id="_approche_récursive">4.1.1. Approche récursive</h4>
+<div class="paragraph">
+<p>Une approche simple pour calculer les termes est de se baser sur une fonction récursive</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-C" data-lang="C">int Fibo_rec_basique(int n)
+{
+    if (n&lt;=1)
+        return 1;
+    return Fibo_rec_basique(n-1) + Fibo_rec_basique(n-2);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Quelle est la complexité de cette méthode ? Posons \(C_n\) le d&#8217;appels de fonctions exécutées pour calculer <code>Fibonacci(n)</code>, chaque appel prenant un temps constant en lui-même. Alors \(C_0 = 1\), \(C_1 = 1\) et \(C_n = C_{n-1} + C_{n-2} + 1\).</p>
+</div>
+<div class="paragraph">
+<p>Cette relation est assez proche de cette de Fibonacci et on peut montrer que \(C_n = O(\phi^n)\) également, le temps est donc exponentiel.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_schéma_des_appels_récursifs">4.1.2. schéma des appels récursifs</h4>
+<div class="imageblock">
+<div class="content">
+<img src="img/fib.png" alt="fib" width="350">
+</div>
+<div class="title">Figure 6. appels_récursifs_Fibonacci</div>
+</div>
+<div class="paragraph">
+<p>On calcule donc de nombreuses fois les mêmes valeurs !</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_mémoïsation_ou_mise_en_cache">4.1.3. Mémoïsation ou mise en cache</h4>
+<div class="paragraph">
+<p>Une idée simple est d&#8217;utiliser la <strong>mémoïsation</strong> ou mémoïzation qui consiste à sauvegarder les valeurs obtenues  lors des appels récursifs et de ne pas les recalculer.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-C" data-lang="C">int FRM_aux(int i, int* memo)
+{
+    if (memo[i] !=0)
+        return memo[i];
+    else
+        memo[i] = FRM_aux(i-1,memo) + FRM_aux(i-2, memo);
+    return memo[i];
+}
+
+int Fibo_rec_memo(int n)
+{
+    int* memo = calloc(n,sizeof(int));
+    memo[0] = 1;     memo[1] = 1;
+    return FRM_aux(n, memo);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Dans le cas de la suite de Fibonacci, la mémoïzation va en fait calculer une et une seule fois chacune des valeurs \(F_i\) pour \(2 \leq i \leq n\). La complexité sera linéaire, en \(O(n)\), la même que pour l&#8217;approche <strong>bottom-up</strong>.</p>
+</div>
+<div class="paragraph">
+<p>Pour certains problèmes, l&#8217;approche récursivité + mémoïsation peut être plus rapide que l&#8217;approche <strong>bottom-up</strong>, si toutes les valeurs précédentes ne sont pas nécessaires.</p>
+</div>
+<div class="paragraph">
+<p>Considérer par exemple la suite définie par \(G_0=1,  G_1=2 , G_3=3\) et \(G_n = G_{n-2} + G_{n/2}\) pour \(n \geq 3\). Les premiers termes sont
++
+\[1, 2, 3, 4, 5, 6, 8, 9, 11, 13, 15, 17, 20, 22, 25, 28, 31, 34, 39, 42, \dots\]</p>
+</div>
+<div class="paragraph">
+<p>Pour calculer \(G_{10}\), on a besoin seulement de \(G_8, G_6, G_4, G_3, G_2, G_1\) et \(G_0\), alors que les termes \(G_9,G_7\) et \(G_5\) ne sont pas nécessaires : la mémoïsation fait donc moins de calcul.</p>
+</div>
+<div class="paragraph">
+<p>La <strong>mémoïsation</strong> est un des éléments essentiels de la programmation dynamique, mais la programmation dynamique s&#8217;applique principalement aux <strong>problèmes d&#8217;optimisation combinatoire</strong> dont le calcul des suites comme Fibonacci ne fait pas partie. Le deuxième élément de la programmation dynamique est celui de <strong>sous-structure optimale</strong> que nous allons voir sur l&#8217;exemple du problème de <strong>sac-à-dos</strong>.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_plus_courts_chemins_dans_un_graphe_acyclique">4.2. Plus courts chemins dans un graphe acyclique</h3>
+<div class="paragraph">
+<p>Considérons la matrice ci-dessous qui comporte des valeurs entières positives et négatives.
+
+\[
+\begin{pmatrix}
+2  & -1 & 3 & 0 &  2 & 1\\
+1  &  1 & 1 & -2 & -2 & 2\\
+-2 & 10 & 7 & -1 & 3 & 3\\
+4  & -3 & -1 & 1 & -3 & 2\\
+2  &  4 & 4 &  12 & 4 & 1\\
+-10&  1 & 0 &  8 & -4 & 0\\
+\end{pmatrix}
+\]
+
+
+On désire se déplacer de la case en haut à gauche vers la case en bas à droite, en allant uniquement à droite en vers le bas.</p>
+</div>
+<div class="paragraph">
+<p>
+\[
+\begin{pmatrix}
+\boxed{2}  & -1 & 3 & 0 &  2 & 1\\
+\boxed{1}  &  \boxed{1} & \boxed{1} & -2 & -2 & 2\\
+-2 & 10 & \boxed{7} & -1 & 3 & 3\\
+4  & -3 & \boxed{-1} & 1 & -3 & 2\\
+2  &  4 & \boxed{4} &  12 & 4 & 1\\
+-10&  1 & \boxed{0} &  \boxed{8} & \boxed{-4} & \boxed{0}\\
+\end{pmatrix}
+\]
+
+</p>
+</div>
+<div class="paragraph">
+<p>On appelle chemin dans la matrice une suite de cases qui commence sur la case en haut à gauche, qui termine en bas à droite, et telles que la case suivante est à droite ou en dessous de la précédente.</p>
+</div>
+<div class="paragraph">
+<p>La longueur d&#8217;un chemin est défini comme la somme des valeurs dans les cases.</p>
+</div>
+<div class="paragraph">
+<p>
+\[
+\begin{pmatrix}
+\boxed{2}  & -1 & 3 & 0 &  2 & 1\\
+\boxed{1}  &  \boxed{1} & \boxed{1} & -2 & -2 & 2\\
+-2 & 10 & \boxed{7} & -1 & 3 & 3\\
+4  & -3 & \boxed{-1} & 1 & -3 & 2\\
+2  &  4 & \boxed{4} &  12 & 4 & 1\\
+-10&  1 & \boxed{0} &  \boxed{8} & \boxed{-4} & \boxed{0}\\
+\end{pmatrix}
+\]
+
+</p>
+</div>
+<div class="paragraph">
+<p>Ce chemin a une longueur
+\(\)2 + 1 + 1 + 1 + 7 + (-1) + 4 + 0 + 8 + (-4) + 0 = 19\(\)</p>
+</div>
+<div class="paragraph">
+<p>Le problème est le suivant : trouver un chemin de longueur minimale et cette longueur minimale.</p>
+</div>
+<div class="paragraph">
+<p>Il s&#8217;agit d&#8217;un problème d'<strong>optimisation</strong>, plus précisément de <strong>plus courts chemins</strong>.</p>
+</div>
+<div class="paragraph">
+<p>+
+\[\min_{c \in C} longueur(c)\]</p>
+</div>
+<div class="paragraph">
+<p>où \(C\) est l&#8217;ensemble des chemins. Un chemin qui donne le minimum est dit <strong>optimal</strong>.</p>
+</div>
+<div class="sect3">
+<h4 id="_sous_structure_optimale">4.2.1. Sous-structure optimale</h4>
+<div class="paragraph">
+<p>Le principe de sous-structure optimale dans ce problème intervient de la façon suivante : soit \(c\) un chemin de la case A à la case B que l&#8217;on peut décomposer en un chemin \(c_1\) de \(A\) à une case \(C\) et \(c_2\) de \(C\) à \(B\),</p>
+</div>
+<div class="paragraph">
+<p>
+\[
+\begin{pmatrix}
+\boxed{A}  & . & . & . &  . & . \\
+.  &  . & . & .    & . &  . \\
+.  &  . & . & \boxed{C}.    & . &  . \\
+.  &  . & . & .    & . &  . \\
+.  &  . & . & .    & . &  . \\
+.  &  . & . & .    & . &  . \\
+.  &  . & . & .    & . &  \boxed{B} \\
+\end{pmatrix}
+\]
+
+</p>
+</div>
+<div class="paragraph">
+<p>+
+\[c : A \overset{c_1}{\longrightarrow} C \overset{c_2}{\longrightarrow} B\]</p>
+</div>
+<div class="paragraph">
+<p><strong>Propriété</strong> : Si \(c\) est un chemin optimal de \(A\) à \(C\), alors :
+* \(c_1\) est un chemin optimal de \(A\) à \(C\)
+* \(c_2\) est un chemin optimal de \(C\) à \(B\)</p>
+</div>
+<div class="paragraph">
+<p>C&#8217;est la notion de <strong>sous-structure optimale</strong>.</p>
+</div>
+<div class="paragraph">
+<p><strong>Preuve</strong> : à supposer par exemple que \(c_1\) n&#8217;est pas optimal, alors il existe un chemin \(c'_1\) de longueur inférieure à \(c_1\). Mais alors le chemin
++
+\[c' : A \overset{c'_1}{\longrightarrow} C \overset{c_2}{\longrightarrow} B\]
+aurait une longueur strictement inférieuse à celle de \(c\), contredisant son optimalité.</p>
+</div>
+<div class="paragraph">
+<p>On peut déduire du résultat précédent une méthode de calcul des plus courts chemins.</p>
+</div>
+<div class="paragraph">
+<p>
+\[
+\begin{pmatrix}
+\boxed{A}  & . & . & . &  . & . \\
+.  &  . & . & .    & . &  . \\
+.  &  . & . & .    & . &  . \\
+.  &  . & . & .    & . &  . \\
+.  &  . & . & .    & . &  . \\
+.  &  . & . & .    & . &  \boxed{B_2} \\
+.  &  . & . & .    & \boxed{B_1} &  \boxed{B} \\
+\end{pmatrix}
+\]
+
+</p>
+</div>
+<div class="paragraph">
+<p>Le plus court chemin de \(A\) à \(B\) est :
+* soit un plus court chemin de \(A\) à \(B_1\), suivi de \(B\) ;
+* soit un plus court chemin de \(A\) à \(B_2\), suivi de \(B\).</p>
+</div>
+<div class="paragraph">
+<p>Notons \(f(C)\) la longueur d&#8217;un plus court chemin de \(A\) à \(C\) pour une case \(C\) quelconque. Alors
+
+\[ (B) = \min( f(B_1) + v_B, f(B_2) + v_B ) \]
+
+\[  = \min(f(B_1),f(B_2)) + v_B\]
+où \(v_B\) est la valeur écrite dans la case \(B\).</p>
+</div>
+<div class="paragraph">
+<p>On peut appliquer plus géréralement cette méthode pour calculer \(f(C)\) pour toutes les cases \(C\).</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_calcul_des_valeurs_de_f">4.2.2. Calcul des valeurs de \(f\)</h4>
+<div class="paragraph">
+<p>1/5 : initialisation</p>
+</div>
+<div class="paragraph">
+<p>
+\[
+\begin{pmatrix}
+2  & -1 & 3 & 0 &  2 & 1\\
+1  &  1 & 1 & -2 & -2 & 2\\
+-2 & 10 & 7 & -1 & 3 & 3\\
+4  & -3 & -1 & 1 & -3 & 2\\
+2  &  4 & 4 &  12 & 4 & 1\\
+-10&  1 & 0 &  8 & -4 & 0\\
+\end{pmatrix} \rightarrow
+\begin{pmatrix}
+2 &  . & . &  . & . & .\\
+. &  . & . &  . & . & .\\
+. &  . & . &  . & . & .\\
+. &  . & . &  . & . & .\\
+. &  . & . &  . & . & .\\
+. &  . & . &  . & . & .\\
+\end{pmatrix}
+\]
+
+</p>
+</div>
+<div class="paragraph">
+<p>2/5 : calcul des bords</p>
+</div>
+<div class="paragraph">
+<p>
+\[
+\begin{pmatrix}
+2  & -1 & 3 & 0 &  2 & 1\\
+1  &  1 & 1 & -2 & -2 & 2\\
+-2 & 10 & 7 & -1 & 3 & 3\\
+4  & -3 & -1 & 1 & -3 & 2\\
+2  &  4 & 4 &  12 & 4 & 1\\
+-10&  1 & 0 &  8 & -4 & 0\\
+\end{pmatrix} \rightarrow
+\begin{pmatrix}
+2 &  1 & 4 &  4 & 6 & 7\\
+3 &  . & . &  . & . & .\\
+1 &  . & . &  . & . & .\\
+5 &  . & . &  . & . & .\\
+7 &  . & . &  . & . & .\\
+-3 &  . & . &  . & . & .\\
+\end{pmatrix}
+\]
+
+</p>
+</div>
+<div class="paragraph">
+<p>-
+## Calcul des valeurs de \(f\)
+3/5 : min du haut et bas
+
+\[
+\begin{pmatrix}
+2  & -1 & 3 & 0 &  2 & 1\\
+1  &  1 & 1 & -2 & -2 & 2\\
+-2 & 10 & 7 & -1 & 3 & 3\\
+4  & -3 & -1 & 1 & -3 & 2\\
+2  &  4 & 4 &  12 & 4 & 1\\
+-10&  1 & 0 &  8 & -4 & 0\\
+\end{pmatrix} \rightarrow
+\begin{pmatrix}
+\boxed{2} &  \boxed{1} & 4 &  4 & 6 & 7\\
+3 &  \boxed{2} & . &  . & . & .\\
+1 &  . & . &  . & . & .\\
+5 &  . & . &  . & . & .\\
+7 &  . & . &  . & . & .\\
+-3 &  . & . &  . & . & .\\
+\end{pmatrix}
+\]
+
+</p>
+</div>
+<div class="paragraph">
+<p>4/5 suite du processus
+
+\[
+\begin{pmatrix}
+2  & -1 & 3 & 0 &  2 & 1\\
+1  &  1 & 1 & -2 & -2 & 2\\
+-2 & 10 & 7 & -1 & 3 & 3\\
+4  & -3 & -1 & 1 & -3 & 2\\
+2  &  4 & 4 &  12 & 4 & 1\\
+-10&  1 & 0 &  8 & -4 & 0\\
+\end{pmatrix} \rightarrow
+\begin{pmatrix}
+2 &  1 & 4 &  4 & 6 & 7\\
+3 &  2 & 3 &  1 & -1 & 1\\
+1 &  . & . &  . & . & .\\
+5 &  . & . &  . & . & .\\
+7 &  . & . &  . & . & .\\
+-3 &  . & . &  . & . & .\\
+\end{pmatrix}
+\]
+
+</p>
+</div>
+<div class="paragraph">
+<p>5/5 : calcul complet
+
+\[
+\begin{pmatrix}
+2  & -1 & 3 & 0 &  2 & 1\\
+1  &  1 & 1 & -2 & -2 & 2\\
+-2 & 10 & 7 & -1 & 3 & 3\\
+4  & -3 & -1 & 1 & -3 & 2\\
+2  &  4 & 4 &  12 & 4 & 1\\
+-10&  1 & 0 &  8 & -4 & 0\\
+\end{pmatrix} \rightarrow
+\begin{pmatrix}
+2 &  1 & 4 &  4 & 6 & 7\\
+3 &  2 & 3 &  1 & -1 & 1\\
+1 &  11 & 10 & 0 & 2 & 4\\
+5 &  2 & 1 &  1 & -2 & 0\\
+7 &  6 & 5 &  13 & 2 & 1\\
+-3 &  -2 & -2 &  6 & -2 & -2\\
+\end{pmatrix}
+\]
+
+</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_calcul_du_plus_court_chemin">5. Calcul  du plus court chemin</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>En remontant depuis la dernière case et en choisissant le min de \(f\)</p>
+</div>
+<div class="paragraph">
+<p>
+\[
+\begin{pmatrix}
+\boxed{2} &  \boxed{1} & 4 &  4 & 6 & 7\\
+3 &  \boxed{2} & \boxed{3} &  \boxed{1} & -1 & 1\\
+1 &  11 & 10 & \boxed{0} & 2 & 4\\
+5 &  2 & 1 &  \boxed{1} & \boxed{-2} & \boxed{0}\\
+7 &  6 & 5 &  13 & \boxed{2} & 1\\
+-3 &  -2 & -2 &  6 & \boxed{-2} & \boxed{-2}\\
+\end{pmatrix}
+\]
+
+</p>
+</div>
+<div class="paragraph">
+<p>Notons que pour une case interne \(C\) ayant une case \(G\) à gauche et une case \(D\) en haut, on a
+
+\[f(C)= f(G) + v_C \Longleftrightarrow f(G) \leq f(H)\]
+
+\[f&#169;= f(H) + v_C \Longleftrightarrow f(H) \leq f(G)\]</p>
+</div>
+<hr>
+<div class="paragraph">
+<p>En résumé le problème du plus court chemin dans une matrice la propriété de <strong>sous-structure optimale</strong> qui est caractéristique des problèmes pouvant être résolus par <strong>programmation dynamique</strong>.</p>
+</div>
+<div class="paragraph">
+<p>Notre solution (implémentée en bottom-up itératif, ou top-down récursif) utilise le fait que les sous-problèmes sont en nombre raisonnable et <strong>mémoïse</strong> les solutions de ces sous-problèmes.</p>
+</div>
+</div>
+</div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-09-22 15:27:46 +0200
+Last updated 2024-10-14 13:38:47 +0200
 </div>
 </div>
 <script type="text/x-mathjax-config">
